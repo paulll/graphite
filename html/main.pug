@@ -1,0 +1,62 @@
+doctype html
+html
+	head
+		title graphite
+		meta(charset="utf-8")
+		link(rel="stylesheet" type="text/css" href="../css/index.css")
+		link(href="//fonts.googleapis.com/css?family=Ubuntu+Mono&subset=latin,cyrillic" rel="stylesheet" type="text/css")
+		link(href="//fonts.googleapis.com/css?family=Roboto+Slab&subset=latin,cyrillic" rel="stylesheet" type="text/css")
+		link(href="../css/cssConsole.css" type="text/css" rel="stylesheet")
+		script(src="https://cdn.rawgit.com/anvaka/VivaGraphJS/e18e39ae/dist/vivagraph.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.5.0/bluebird.min.js")
+		script(src="../js/cssConsole.min.js")
+		script(src="../js/jsep.min.js")
+		script(src="https://unpkg.com/dexie@latest/dist/dexie.js")
+		script(src="https://cdn.rawgit.com/adamhooper/js-priority-queue/f291ac1d/priority-queue.min.js")
+		script(defer="defer" src="../js/code.js")
+	body.h-wrap
+		div#current
+		div.v-wrap
+			#graph-wrap
+			#console >
+		#panel
+			#info
+				#avatar
+				a#name
+				#id
+			#verbose
+				div
+					span.command скрыто друзей
+					span#hidden.args 0:
+				div
+					span.command скрыт друзьями
+					span#hidden-by.args 0:
+			#cli-hint
+			#expr-hint
+				div 
+					span.command селекторы
+					// u - user(search), f - friendsOfUser(search), s - selected, m - men
+					span.args u%search
+					span.args f%search
+					span.args s
+					span.args m 
+				div 
+					span.command операции
+					span.args x+y
+					span.args x-y
+					span.args x^y
+					span.args !x
+			#debug
+				div 
+					span.command вершин
+					span#s_verts.args
+				div
+					span.command ребер
+					span#s_edges.args 0
+				div 
+					span.command вершин загружено
+					span#s_real_verts.args 0
+				div
+					span.command ребер загружено
+					span#s_real_edges.args 0

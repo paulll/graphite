@@ -1,0 +1,93 @@
+html,body
+	margin 0
+	top 0
+	left 0
+	right 0
+	bottom 0
+
+body.h-wrap
+	display flex
+	flex-direction row
+	height 100%
+	height 100vh
+	overflow hidden
+	font-family Roboto Slab;
+
+	#current
+		position: absolute;
+		padding: 5px;
+		background-color: #1c1c1c;
+		color: white;
+		z-index: 5;
+		-webkit-transition: opacity ease .7s .4s;
+		-moz-transition: opacity ease 1s 1s;
+		-ms-transition: opacity ease 1s 1s;
+		-o-transition: opacity ease 1s 1s;
+		transition: opacity ease .7s .4s;
+		opacity: 0;
+		top: 20px;
+		left: 10px;
+
+	div.v-wrap
+		flex-grow 1
+		display flex
+		flex-direction column
+		justify-content stretch
+		height 100vh
+		margin 0
+		padding 0
+
+		#graph-wrap
+			flex-grow 1
+			
+		#console
+			background black
+			color white
+			display flex
+			flex-direction row
+			align-items center
+			justify-content center
+			font-family Ubuntu Mono,Monaco,Consolas,monospace
+
+	#panel
+		background #1c1c1c
+		width 304px
+		height 100vh
+		margin 0
+		padding 0
+		#info
+			background white
+			padding 20px
+			margin 7px
+			#avatar
+				width 250px
+				height 250px
+				box-sizing content-box
+				background #cccccc
+				background-size cover
+				
+			#name
+				margin 14px 0
+				margin-bottom 7px
+				display block
+				color black
+				text-decoration none
+				background white
+				font-size 120%
+				font-family Roboto Slab, dejavu-sans, sans-serif
+		
+		#cli-hint, #expr-hint, #verbose, #debug
+			margin 7px
+			background white
+			font-family Ubuntu Mono, Monaco, monospace;
+			
+			span:before
+				content " "
+
+			.command
+				color #1177ff
+				background #cccccc
+			.args
+				color #11ee11
+			.desc
+				color #1c1c1c
