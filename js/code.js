@@ -1,4 +1,5 @@
 var graph = Viva.Graph.graph();
+var service_token = "590b7e5b590b7e5b590b7e5bea596a14f85590b590b7e5b039be32ce7e754aab89565f1";
 var graphics = Viva.Graph.View.webglGraphics();
 var layout = Viva.Graph.Layout.forceDirected(graph, {
     springLength: 20,
@@ -22,7 +23,7 @@ const settings = {
 	nodeSize: 30,
 	persistentCache: false,
 	preloadUserInfo: true,
-	smartPreload: true,
+	smartPreload: false,
 	downloadThreads: 5
 }
 
@@ -43,7 +44,8 @@ const vk = (method, params={}) => {
 
 		const s = document.createElement('script');
 		const cid = vk.callback.last++;
-		s.src = `https://api.vk.com/method/${method}?callback=vk.callback.get(${cid})${qs}`
+		s.src = 
+		`https://api.vk.com/method/${method}?callback=vk.callback.get(${cid})${qs}&access_token=${service_token}`
 		s.type = 'text/javascript';
 
 		document.head.appendChild(s);
