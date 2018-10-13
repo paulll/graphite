@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="PROJECT" libraries="{bluebird, dexie, eventemitter2, jquery.slim, ngraph.forcelayout3d@0.0.16#, ngraph.forcelayout@0.5.0#, ngraph.graph@0.0.14#, ngraph.pixel@2.4.1#, priority-queue, vivagraph}" />
+  </component>
+</project>

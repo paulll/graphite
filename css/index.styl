@@ -76,13 +76,19 @@ body.h-wrap
 				font-size 120%
 				font-family Roboto Slab, dejavu-sans, sans-serif
 		
-		#cli-hint, #expr-hint, #verbose, #debug
+		#cli-hint, #expr-hint, #verbose, #debug, #group
 			margin 7px
 			background white
 			font-family Ubuntu Mono, Monaco, monospace;
-			
+
 			span:before
 				content " "
+
+			&.hidden
+				display none
+
+			.clickable
+				cursor: pointer
 
 			.command
 				color #1177ff

@@ -1,11 +1,19 @@
 {
-  "name": "paulll.js.advlinks.standalone-gui.1",
-  "version": "1.0.0",
-  "description": "",
+  "name": "graphite",
+  "version": "3.0.1",
+  "description": "vk graph tool",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://git.paulll.cc/paulll/graphite"
+  },
+  "keywords": [
+    "vk",
+    "graph"
+  ],
   "author": "paulll",
   "license": "MIT"
 }
