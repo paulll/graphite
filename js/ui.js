@@ -55,8 +55,6 @@ ui.getNodeUI = (node) => {
 };
 
 app.on('selectionChanged', (selection, oldSelection) => {
-	console.log(selection, oldSelection);
-
 	for (let personId of oldSelection) {
 		if (selection.has(personId)) continue;
 		const nodeUI = ui.getNodeUI(ui.graph.getNode(personId));
