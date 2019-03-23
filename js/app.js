@@ -219,7 +219,7 @@ app.startDeepHiddenSearch = (userId) => {
 
 			progress.emit('progress', `всё!`);
 		} else {
-			progress.emit('progress', 'failure')
+			progress.emit('progress', 'ошибка')
 		}
 	};
 
