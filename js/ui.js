@@ -240,14 +240,22 @@ $('#console').cssConsole({onEnter: () => {
 	if (!prog) {
 		$('.cssConsoleInput').val(':no such command');
 		setTimeout(() => {
-			$('.cssConsoleInput').val('')
+			$('.cssConsoleInput').val('');
 		}, 500);
 	} else {
 		prog(...args);
-		$('.cssConsoleInput').val(':running')
-		$('.cssConsoleInput').val('')
+		$('.cssConsoleInput').val(':running');
+		$('.cssConsoleInput').val('');
 	}
 }});
+
+setTimeout(() => {
+	const id = document.location.hash.slice(1);
+	if (id.length)
+		app.addManualDisplayedPerson(+id);
+	else
+		app.addManualDisplayedPerson(150547176);
+}, 0);
 
 $('.cssConsoleInput').on('blur', () => $('.cssConsoleInput').focus());
 $('.cssConsoleInput').focus();
@@ -260,5 +268,4 @@ ui._events
 ui._graphics.node(ui.getNodeUI);
 ui._graphics.link(ui.getLinkUI);
 ui._renderer.run();
-app.addManualDisplayedPerson(150547176);
 requestAnimationFrame(displayDebugInfo);
