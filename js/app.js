@@ -83,7 +83,9 @@ app.searchUserByString = async (search) => {
 app.startExtendCommunityCluster = () => {
 	const progress = new EventEmitter2;
 	const selected = new Set(app.selectedPersons);
-	let last = 0;
+	let last = 0, stop=false;
+
+	progress.on('stop', ()=>stop=true);
 
 	const start = async () => {
 		const linkedMap = new Map;
@@ -101,6 +103,7 @@ app.startExtendCommunityCluster = () => {
 		const arr = Array.from(linkedMap.entries()).filter(x => x[1] > threshold).sort((a, b) => b[1] - a[1]);
 		let j = arr.length;
 		for (let [fof, weight] of arr) {
+			if (stop) return process.emit('progress', 'остановлено');
 			progress.emit('progress', `д^3 вес: ${weight}/${threshold} (${j--}) `);
 			app.addDisplayedPerson(fof);
 			selected.add(fof);
@@ -122,7 +125,9 @@ app.startExtendCommunity = () => {
 	const selected = new Set(app.selectedPersons);
 	const initialSelected = new Set(app.selectedPersons);
 	const threshold = Math.max(Math.floor(Math.log2(selected.size)), 3);
-	let last = 0;
+	let last = 0, stop=false;
+
+	progress.on('stop', ()=>stop=true);
 
 	const start = async () => {
 		const linkedMap = new Map;
@@ -151,6 +156,7 @@ app.startExtendCommunity = () => {
 
 		let j = arr.length;
 		for (let [fof, weight] of arr) {
+			if (stop) return progress.emit('progress', 'остановлено');
 			progress.emit('progress', `д^3 вес: ${Math.round(weight*1000)}/${Math.round(threshold*1000)} (${j--}) `);
 			app.addDisplayedPerson(fof);
 			selected.add(fof);
@@ -169,8 +175,10 @@ app.startExtendCommunity = () => {
 };
 
 app.startDeepHiddenSearch = (userId) => {
-	let last = 0;
+	let last = 0, stop = false;
 	const progress = new EventEmitter2;
+
+	progress.on('stop', ()=>stop=true);
 	const start = async () => {
 		progress.emit('progress', `инициализация`);
 		await app.addManualDisplayedPerson(userId);
@@ -199,6 +207,7 @@ app.startDeepHiddenSearch = (userId) => {
 			let j = arr.length;
 			for (let [fof, weight] of arr) {
 				if (weight < 2) break;
+				if (stop) return progress.emit('progress', 'остановлено');
 				progress.emit('progress', `д^3 вес: ${weight} (${j--})`);
 				await vk.getFriends(fof);
 			}
