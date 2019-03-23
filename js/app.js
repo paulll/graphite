@@ -4,8 +4,11 @@ app.manualDisplayedPersons = new Set;
 app.displayedPersons = new Set;
 app.selectedPersons = new Set;
 app.graph = ngraph_graph();
+app.firstPerson = 0;
 
 app.addManualDisplayedPerson = async (personId) => {
+	app.firstPerson = app.firstPerson || personId;
+
 	// download person info & friends
 
 	app.manualDisplayedPersons.add(personId);
@@ -42,7 +45,7 @@ app.addManualDisplayedPerson = async (personId) => {
 		}))
 	]);
 
-	ui._layout.pinNode(ui.graph.getNode(150547176), true);
+	ui._layout.pinNode(ui.graph.getNode(app.firstPerson), true);
 	ui.resetLinks(+personId);
 };
 
