@@ -121,42 +121,45 @@ ui.events = {
 			app.updateSelection(selection);
 
 			if (selection.size > 2) {
-				$('#group').removeClass('hidden');
-				$('#extend-unlimited').text('дополнить кластер (много!)');
+				document.getElementById('group').classList.remove('hidden');
+				document.getElementById('extend-unlimited').textContent = 'дополнить кластер (много!)';
 				document.getElementById('extend-unlimited').onclick = () => {
 					const progress = app.startExtendCommunityCluster();
 					progress.on('progress', status => {
-						$('#extend-unlimited').text(status);
+						document.getElementById('extend-unlimited').textContent = status;
+						document.getElementById('extend-unlimited').onclick = ()=>progress.emit('stop');
 					});
-				}
-				$('#extend').text('дополнить сообщество');
+				};
+				document.getElementById('extend').textContent = 'дополнить сообщество';
 				document.getElementById('extend').onclick = () => {
 					const progress = app.startExtendCommunity();
 					progress.on('progress', status => {
-						$('#extend').text(status);
+						document.getElementById('extend').textContent = status;
+						document.getElementById('extend').onclick = ()=>progress.emit('stop');
 					});
 				}
 			} else {
-				$('#group').addClass('hidden');
+				document.getElementById('group').classList.add('hidden');
 			}
 
 			return false;
 		}
 
-		$('#avatar').addClass('active');
-		$('#group').addClass('hidden');
+		document.getElementById('avatar').classList.add('active');
+		document.getElementById('group').classList.add('hidden');
 
 		app.updateSelection(new Set([+node.id]));
 
-		$('#avatar').css('background-image', 'url('+vk.users.get(+node.id).photo_max+')');
-		$('#name').text(vk.users.get(+node.id).first_name + ' ' + vk.users.get(+node.id).last_name);
-		$('#id').text(''+node.id);
-		$('#name').attr('href', 'http://vk.com/id'+node.id);
-		$('#hiddensearch').text('(найти больше?)');
+		document.getElementById('avatar').style.backgroundImage = 'url('+vk.users.get(+node.id).photo_max+')';
+		document.getElementById('name').textContent = vk.users.get(+node.id).first_name + ' ' + vk.users.get(+node.id).last_name;
+		document.getElementById('id').textContent = ''+node.id;
+		document.getElementById('name').href = 'http://vk.com/id'+node.id;
+		document.getElementById('hiddensearch').textContent = '(найти больше?)';
 		document.getElementById('hiddensearch').onclick = () => {
 			const progress = app.startDeepHiddenSearch(node.id);
 			progress.on('progress', status => {
-				$('#hiddensearch').text(status);
+				document.getElementById('hiddensearch').textContent = status;
+				document.getElementById('hiddensearch').onclick = ()=>progress.emit('stop');
 			});
 		};
 		document.getElementById('name').onclick =  () =>  {
@@ -173,8 +176,8 @@ ui.events = {
 			if (!inTargetFriends && inLinkedFriends) return hidden.add(+linked.id) && false;
 		}, false);
 
-		$('#hidden').text(hidden.size);
-		$('#hidden-by').text(hiddenBy.size);
+		document.getElementById('hidden').textContent = hidden.size;
+		document.getElementById('hidden-by').textContent = hiddenBy.size;
 		document.getElementById('hidden').onclick = () => {app.updateSelection(hidden)};
 		document.getElementById('hidden-by').onclick = () => {app.updateSelection(hiddenBy)};
 	},
@@ -220,11 +223,10 @@ ui.helper.hide = function () {
 //
 
 const displayDebugInfo = () => {
-	$('#s_edges').text(ui.graph.getLinksCount());
-	$('#s_verts').text(ui.graph.getNodesCount());
-	$('#s_real_edges').text(app.graph.getLinksCount());
-	$('#s_real_verts').text(app.graph.getNodesCount());
-
+	document.getElementById('s_edges').textContent = ui.graph.getLinksCount();
+	document.getElementById('s_verts').textContent = ui.graph.getNodesCount();
+	document.getElementById('s_real_edges').textContent = app.graph.getLinksCount();
+	document.getElementById('s_real_verts').textContent = app.graph.getNodesCount();
 	requestAnimationFrame(displayDebugInfo);
 };
 
