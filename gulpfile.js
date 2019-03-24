@@ -6,16 +6,16 @@ const watch = require('gulp-watch');
 const html = () => src('views/*.pug')
 	.pipe(pug())
 	.pipe(dest('site'));
-const css = () => src('style/*.styl')
+const css = () => src(['style/*.styl', 'style/*.css'])
 	.pipe(styl({compress: true}))
 	.pipe(dest('site/style'));
 const js = () => src('js/**/*')
 	.pipe(dest('site/js'));
 
-const html_stream () => watch('views/*.pug')
+const html_stream = () => watch('views/*.pug')
 	.pipe(pug())
 	.pipe(dest('site'));
-const css_stream = () => watch('styl/*.styl')
+const css_stream = () => watch(['style/*.styl', 'style/*.css'])
 	.pipe(styl({compress: true}))
 	.pipe(dest('site/style'));
 const js_stream = () => watch('js/**/*.js')
