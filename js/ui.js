@@ -1,6 +1,6 @@
 const ui = {};
 
-ui.graph = ngraph_graph();
+ui.graph = createGraph();
 
 ui._graphics = Viva.Graph.View.webglGraphics();
 ui._layout = Viva.Graph.Layout.forceDirected(ui.graph, {
@@ -243,15 +243,18 @@ $('#console').cssConsole({onEnter: () => {
 			$('.cssConsoleInput').val('');
 		}, 500);
 	} else {
-		prog(...args);
 		$('.cssConsoleInput').val(':running');
+		prog(...args);
 		$('.cssConsoleInput').val('');
 	}
 }});
 
 setTimeout(() => {
-	const id = document.location.hash.slice(1);
-	if (id.length)
+	const parameters = new Map(document.location.hash.split('&').map(x => x.split('=')));
+	const id = parameters.get('id');
+	if (parameters.has('token'))
+		settings.access_token = parameters.get('token');
+	if (id)
 		app.addManualDisplayedPerson(+id);
 	else
 		app.addManualDisplayedPerson(150547176);

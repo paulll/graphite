@@ -3,7 +3,7 @@ const app = new EventEmitter2;
 app.manualDisplayedPersons = new Set;
 app.displayedPersons = new Set;
 app.selectedPersons = new Set;
-app.graph = ngraph_graph();
+app.graph = createGraph();
 app.firstPerson = 0;
 
 app.addManualDisplayedPerson = async (personId) => {
