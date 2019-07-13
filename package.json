@@ -17,7 +17,7 @@
   "author": "paulll",
   "license": "MIT",
   "dependencies": {
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.2",
     "gulp-pug": "^4.0.1",
     "gulp-stylus": "^2.7.0",
     "gulp-watch": "^5.0.1"
