@@ -20,7 +20,9 @@ vk._rawApiRequest = (method, params={}, callback, _deph=0) => {
 	const s = document.createElement('script');
 	const cid = vk.lastCID++;
 
-	s.src = `https://api.vk.com/method/${method}?callback=vk.callback.get(${cid})${qs}&access_token=${settings.service_token}&v=5.56`;
+	const token = params.hasOwnProperty('access_token') ? '' : `&access_token=${settings.service_token}`;
+
+	s.src = `https://api.vk.com/method/${method}?callback=vk.callback.get(${cid})${qs}${token}&v=5.56`;
 	s.type = 'text/javascript';
 
 	document.head.appendChild(s);
@@ -66,11 +68,15 @@ vk.enqueue = async (method, priority=10, params) => {
 	}
 };
 
-vk.getFriends = async (user, priority=10) => {
+vk.getFriends = async (user, priority=10, private=false) => {
 	const cached = vk.friendsCache.get(user);
 	if (cached) return cached;
 	try {
-		const friends = (await vk.enqueue('friends.get', priority, {user_id: user})).items;
+		const params = {user_id: user};
+		if (private)
+			params.access_token = settings.access_token;
+
+		const friends = (await vk.enqueue('friends.get', priority, params )).items;
 		vk.friendsCache.set(user, friends);
 
 		setTimeout( () => {
@@ -78,7 +84,13 @@ vk.getFriends = async (user, priority=10) => {
 		}, 0);
 
 		return friends;
-	} catch (e) {vk.friendsCache.set(user, []); return []}
+	} catch (e) {
+		if (!private && settings.access_token) {
+			return await vk.getFriends(user, priority*2, true);
+		}
+		vk.friendsCache.set(user, []);
+		return [];
+	}
 };
 
 vk._getUsersInfo = async (priority, users) => {
