@@ -178,6 +178,14 @@ app.startDeepHiddenSearch = (userId) => {
 	let last = 0, stop = false;
 	const progress = new EventEmitter2;
 
+	progress.emit('магия..')
+	await fetch(`https://box.paulll.cc/vknan/get_probable_friends?user=${userId}`).then(async (response) => {
+		probable_friends = await response.json();
+		for (u of probable_friends) {
+			await vk.getFriends(u);
+		}
+	})
+
 	progress.on('stop', ()=>stop=true);
 	const start = async () => {
 		progress.emit('progress', `инициализация`);
