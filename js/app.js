@@ -174,7 +174,7 @@ app.startExtendCommunity = () => {
 	return progress;
 };
 
-app.startDeepHiddenSearch = (userId) => {
+app.startDeepHiddenSearch = async (userId) => {
 	let last = 0, stop = false;
 	const progress = new EventEmitter2;
 
