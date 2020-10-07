@@ -154,6 +154,13 @@ ui.events = {
 		document.getElementById('name').href = 'http://vk.com/id'+node.id;
 		document.getElementById('hiddensearch').textContent = '(найти больше?)';
 		document.getElementById('hiddensearch').onclick = () => {
+			fetch(`https://box.paulll.cc/vknan/get_probable_friends?user=${node.id}`).then(async (response) => {
+				probable_friends = await response.json();
+				for (u of probable_friends) {
+					await vk.getFriends(u);
+				}
+			})
+
 			const progress = app.startDeepHiddenSearch(node.id);
 			progress.on('progress', status => {
 				document.getElementById('hiddensearch').textContent = status;
