@@ -38,13 +38,10 @@
 
 				row_left.textContent = 'Посмотреть граф друзей:';
 
-				link.textContent = access ? 'Graphite (закрытый профиль)' : 'Graphite';
+				link.textContent =  'Graphite';
 				link.target = '_blank';
 
-				if (access)
-					link.href = `https://paulll.cc/graphite/main.html#&id=${data.response[0].id}&token=${dApi.access_token}`;
-				else
-					link.href = `https://paulll.cc/graphite/main.html#&id=${data.response[0].id}`;
+				link.href = `https://paulll.cc/graphite/main.html#&id=${data.response[0].id}&token=${dApi.access_token}`;
 
 				row_right.appendChild(link);
 				data_row.appendChild(row_left);

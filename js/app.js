@@ -66,7 +66,7 @@ app.addDisplayedPerson = (personId) => {
 app.searchUserByString = async (search) => {
 	search = search.toLowerCase().trim();
 	try {
-		search = (+(await vk('users.get', {v:5.56,user_ids:search}))[0].id);
+		search = (+(await vk('users.get', {v:5.58,user_ids:search}))[0].id);
 	} catch (e) {}
 
 	const found = new Set;
