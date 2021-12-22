@@ -22,7 +22,7 @@ vk._rawApiRequest = (method, params={}, callback, _deph=0) => {
 
 	const token = params.hasOwnProperty('access_token') ? '' : `&access_token=${settings.service_token}`;
 
-	s.src = `https://api.vk.com/method/${method}?callback=vk.callback.get(${cid})${qs}${token}&v=5.56`;
+	s.src = `https://api.vk.com/method/${method}?callback=vk.callback.get(${cid})${qs}${token}&v=5.81`;
 	s.type = 'text/javascript';
 
 	document.head.appendChild(s);
@@ -63,12 +63,12 @@ vk.enqueue = async (method, priority=10, params) => {
 			result = await vk._promiseApiRequest(method, params);
 	} finally {
 		vk.PENDING--;
-		setTimeout(vk._nextRequest, 0);
+		setTimeout(vk._nextRequest, 400);
 		return result;
 	}
 };
 
-vk.getFriends = async (user, priority=10, private=false) => {
+vk.getFriends = async (user, priority=10, private=true) => {
 	const cached = vk.friendsCache.get(user);
 	if (cached) return cached;
 	try {
